@@ -1,0 +1,20 @@
+doctype html
+
+html(ng-app='interface')
+	head
+		base(href='/')
+		block title
+		
+		link(rel="stylesheet", type="text/css", href="bootstrap/dist/css/bootstrap.css")
+		meta(name='viewport', content='width=device-width, user-scalable=no')
+		meta(name='viewport', content='initial-scale=1.0, maximum-scale=1.0')
+	block body
+	
+	script(type='text/javascript', src='jquery/dist/jquery.js')
+	script(type='text/javascript', src='bootstrap/dist/js/bootstrap.js')
+	script(type='text/javascript', src='angular/angular.js')
+	script(type='text/javascript', src='angular-route/angular-route.js')
+	script(type='text/javascript', src='scripts/app.js')
+	script(type='text/javascript', src='scripts/services/StatsService.js')
+	script(type='text/javascript', src='scripts/controllers/FrontpageCtrl.js')
+	script(type='text/javascript', src='scripts/directives/displayData.js')

@@ -1,0 +1,16 @@
+{
+  "name": "statsAPI",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thekris121",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.10.1",
+    "body-parser": "~1.9.2",
+    "mongoose": "~3.8.18"
+  }
+}

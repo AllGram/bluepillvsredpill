@@ -1,0 +1,9 @@
+.frontpage
+	br
+	.col-md-3
+		.link(ng-repeat='(name, key) in keys track by $index' ng-click='selectkey(key)')
+			.btn.btn-primary
+				| {{key}}
+	.col-md-9
+		display-data
+	

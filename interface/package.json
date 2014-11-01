@@ -1,0 +1,18 @@
+{
+  "name": "interface",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "thekris121",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.10.1",
+    "mongoose": "~3.8.18",
+    "jade": "~1.7.0",
+    "underscore": "~1.7.0",
+    "body-parser": "~1.9.2"
+  }
+}

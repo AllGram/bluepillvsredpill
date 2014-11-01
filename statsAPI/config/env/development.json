@@ -1,0 +1,7 @@
+{
+	"db": {
+		"local": {
+			"URI": "mongodb://localhost/arb_betting"
+		}
+	}
+}

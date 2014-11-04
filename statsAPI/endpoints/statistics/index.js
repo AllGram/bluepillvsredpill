@@ -5,20 +5,13 @@ var _ = require('../../bower_components/underscore/underscore.js');
 
 exports.getKeys = function (req, res) {
 	esClient.search({
-		"fields" : ["key"],
+		"fields": ["key"],
 		index: index,
 		type: type,
 		body: {
-	        "query": { 
-		        "match_all": {} 
-		    },
-		    "aggs": {
-	        	"grouped_by_key": {
-	          		"terms": {
-		            	"field": "key"
-		          	}
-		        }
-	      	}
+			"query": {
+				"match_all": {}
+			}
 		}
 	}, function (err, results) {
 		if (err) {
@@ -26,14 +19,19 @@ exports.getKeys = function (req, res) {
 			return;
 		}
 
-		results = results.aggregations.grouped_by_key.buckets;
-		keys = {}
+		var retarray = [];
+		var retobj = {};
+		_.each(results.hits.hits, function (value, i) {
+			retarray.push(value.fields.key);
+		});
 
-		_.each(results, function(result, i) {
-			keys['key' + i] = result.key;
-		})
+		retarray = _.uniq(retarray);
 
-		res.json(keys);
+		_.each(retarray, function (value, i) {
+			retobj['key' + i] = value;
+		});
+
+		res.json(retobj);
 	});
 };
 
@@ -43,9 +41,14 @@ exports.getTime = function (req, res) {
 		index: index,
 		type: type,
 		body: {
-			"query": { 
+			"query": {
 				"match": {
 					"key": key
+				}
+			},
+			"sort": {
+				"timestamp": {
+					"order": "asc"
 				}
 			}
 		}
@@ -59,8 +62,9 @@ exports.getTime = function (req, res) {
 		allResults[key] = [];
 
 		_.each(results.hits.hits, function (result, i) {
-			tmp = { "execution_time": result._source.execution_time, 
-					"timestamp": result._source.timestamp
+			tmp = {
+				"execution_time": result._source.execution_time,
+				"timestamp": result._source.timestamp
 			};
 
 			allResults[key].push(tmp);
@@ -80,24 +84,29 @@ exports.getTimeInRange = function (req, res) {
 		index: index,
 		type: type,
 		body: {
-		    "query": {
-		        "filtered": {
-		            "query": {
-		                "match": {
-		            		"key": key
-		            	}
-		            },
-		            "filter": {
-		                "range": {
-		                    "timestamp": {
-		                        "from": start,
-		                        "to": end
-		                    }
-		                }
-		            }
-		        }
-		    }
-   		}
+			"query": {
+				"filtered": {
+					"query": {
+						"match": {
+							"key": key
+						}
+					},
+					"filter": {
+						"range": {
+							"timestamp": {
+								"from": start,
+								"to": end
+							}
+						}
+					}
+				}
+			},
+			"sort": {
+				"timestamp": {
+					"order": "asc"
+				}
+			}
+		}
 	}, function (err, results) {
 		if (err) {
 			console.log('An error occurred while calling getTimeInRange', err);
@@ -107,8 +116,9 @@ exports.getTimeInRange = function (req, res) {
 		allResults[key] = [];
 
 		_.each(results.hits.hits, function (result, i) {
-			tmp = { "execution_time": result._source.execution_time, 
-					"timestamp": result._source.timestamp
+			tmp = {
+				"execution_time": result._source.execution_time,
+				"timestamp": result._source.timestamp
 			};
 
 			allResults[key].push(tmp);

@@ -34,3 +34,14 @@ exports.gettime = function (req, res) {
 	});
 
 };
+
+exports.getrange = function (req, res) {
+	StatsService.getrange(req.params, function (err, keys) {
+		if (err) {
+			return res.send(400, err);
+		}
+
+		return res.json(keys);
+	});
+
+};

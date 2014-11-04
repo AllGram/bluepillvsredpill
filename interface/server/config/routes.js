@@ -9,6 +9,8 @@ module.exports = function (app, router) {
 
 	router.get('/gettime/:key', index.gettime);
 
+	router.get('/getrange/:key/from/:from/to/:to', index.getrange);
+
 	router.get('/partials/:partial', index.partials);
 
 	router.get('*', index.index);

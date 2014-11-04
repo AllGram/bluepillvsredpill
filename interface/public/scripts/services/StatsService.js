@@ -22,7 +22,7 @@ angular.module('interface')
 
 				return deferred.promise;
 			},
-			gettimes: function (key) {
+			gettime: function (key) {
 
 				var deferred = $q.defer();
 
@@ -36,6 +36,19 @@ angular.module('interface')
 
 				return deferred.promise;
 
+			},
+			getrange: function (key) {
+				var deferred = $q.defer();
+
+				$http.get('/getrange/' + key.key + '/from/' + key.startrange + '/to/' + key.endrange)
+					.success(function (data) {
+						deferred.resolve(data);
+					})
+					.error(function (data) {
+						deferred.reject(data);
+					});
+
+				return deferred.promise;
 			}
 		};
 	}

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('interface', ['ngRoute'])
+angular.module('interface', ['ngRoute', 'ui.bootstrap.datetimepicker', 'highcharts-ng'])
 
 .config(['$routeProvider', '$locationProvider',
 	function ($routeProvider, $locationProvider) {

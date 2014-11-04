@@ -1,9 +1,30 @@
 .frontpage
-	br
-	.col-md-3
-		.link(ng-repeat='(name, key) in keys track by $index' ng-click='selectkey(key)')
-			.btn.btn-primary
-				| {{key}}
-	.col-md-9
-		display-data
-	
+	.row
+		.col-md-3
+			.link(ng-repeat='(name, key) in keys track by $index' ng-click='selectkey(key)')
+				.btn.btn-primary.btn-block(ng-class = '{ "selectedClass": selected[$index] }', ng-click = 'selectClass($index)')
+					| {{key}}
+		.col-md-8 
+			.row
+				.col-md-6
+					h4
+						| Start is:   {{showstart || 'not set'}}
+					div(class="dropdown")
+						a(class="dropdown-toggle-start btn btn-primary btn-block" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="")
+							| Click here to set start range
+						ul(class="dropdown-menu" role="menu" aria-labelledby="dLabel")
+							datetimepicker(data-ng-model="startrange" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-start' }")
+				.col-md-6
+					h4
+						| End is:   {{showend || 'not set'}}
+					div(class="dropdown")
+						a(class="dropdown-toggle-end btn btn-primary btn-block" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="")
+							| Click here to set end range
+						ul(class="dropdown-menu" role="menu" aria-labelledby="dLabel")
+							datetimepicker(data-ng-model="endrange" data-datetimepicker-config="{ dropdownSelector: '.dropdown-toggle-end' }")
+				.col-md-12
+					button.btn.btn-danger.btn-block(ng-click='clearrange()')
+						| CLEAR RANGE
+			.row
+				highchart(ng-show='keysnotempty' id="chart1" config="chartConfig" class="span10")
+				display-data

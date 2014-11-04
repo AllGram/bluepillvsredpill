@@ -1,4 +1,3 @@
-var FunctionStats = require('../../schemas/models.js').FunctionStats;
 var esClient = require('../../schemas/models.js').esClient;
 var index = 'functionstats';
 var type = 'stats';
@@ -44,11 +43,11 @@ exports.getTime = function (req, res) {
 		index: index,
 		type: type,
 		body: {
-	        "query": { 
-		        "match": {
-        			"key": key
-            	}
-		    }
+			"query": { 
+				"match": {
+					"key": key
+				}
+			}
 		}
 	}, function (err, results) {
 		if (err) {

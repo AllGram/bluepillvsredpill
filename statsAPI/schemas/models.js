@@ -1,4 +1,9 @@
+var es = require('elasticsearch');
 var mongoose = require('mongoose');
+
+var esClient = new es.Client({
+	host: 'http://localhost:9200'
+})
 
 var functionStatsSchema = new mongoose.Schema({
 
@@ -7,7 +12,7 @@ var functionStatsSchema = new mongoose.Schema({
 		required: true
 	},
 	'timestamp': {
-		type: Date,
+		type: Number,
 		required: true
 	},
 	'token': {
@@ -24,5 +29,6 @@ var functionStatsSchema = new mongoose.Schema({
 var FunctionStats = mongoose.model('FunctionStats', functionStatsSchema);
 
 module.exports = {
-	'FunctionStats': FunctionStats
+	'FunctionStats': FunctionStats,
+	'esClient': esClient
 };

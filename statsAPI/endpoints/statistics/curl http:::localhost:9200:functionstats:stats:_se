@@ -1,0 +1,42 @@
+curl http://localhost:9200/functionstats/stats/_search -d '
+{
+	"query": {
+		_match_all": {}
+	}
+}'
+
+curl http://localhost:9200/functionstats/stats/_search -d '
+{
+	"fields" : ["key", "execution_time"],
+    "query": {
+        "filtered": {
+            "query": {
+            	"match": {
+            		"key": "numbers.py-twoTimesTable"
+            	}
+            },
+            "filter": {
+                "range": {
+                    "timestamp": {
+                        "from": 1414951064,
+                        "to": 1414951458
+                    }
+                }
+            }
+        }
+    }
+}'
+
+PUT functionstats/stats/_mapping
+{
+    "stats": {
+      "properties": {
+         "key": {
+            "type": "string",
+            "index": "not_analyzed"
+            }
+         }
+      }
+   }
+}
+    

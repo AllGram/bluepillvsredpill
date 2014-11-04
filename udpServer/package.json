@@ -9,6 +9,7 @@
   "author": "thekris121",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "mongoose": "~3.8.18"
+    "mongoose": "~3.8.18",
+    "elasticsearch": "^2.4.3"
   }
 }

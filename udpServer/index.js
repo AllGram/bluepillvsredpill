@@ -27,7 +27,6 @@ server.on('message', function (msg, rinfo) {
 			return;
 		}
 		console.log('functionStats successfully saved', stats);
-
 	});
 });
 
